@@ -9,7 +9,7 @@ metadata:
     # job is considered part of the release.  
     "helm.sh/hook": post-install,post-upgrade  
     "helm.sh/hook-weight": "-5"  
-    "helm.sh/hook-delete-policy": hook-success
+    "helm.sh/hook-delete-policy": hook-succeeded
 data:
   approve-sub.sh: |
     # This scripts checks if "startingCSV" is set on the Subscription and in that case approves only the InstallPlan with the wanted CSV
