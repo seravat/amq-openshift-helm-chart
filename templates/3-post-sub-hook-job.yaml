@@ -1,0 +1,32 @@
+---
+{{- if eq .Values.amq.operator.subscription.installPlanApproval "Manual"}}
+apiVersion: batch/v1  
+kind: Job  
+metadata:  
+  name: {{ print .Values.amq.name "-og" }}-post-install-hook-job
+  annotations:  
+    # This is what defines this resource as a hook. Without this line, the  
+    # job is considered part of the release.  
+    "helm.sh/hook": post-install,post-upgrade  
+    "helm.sh/hook-weight": "-5"  
+    "helm.sh/hook-delete-policy": hook-failed 
+spec:  
+  template:  
+    metadata:  
+      name: {{ print .Values.amq.name "-og" }}-post-install-hook-job
+    spec:  
+      restartPolicy: Never  
+      containers:  
+      - name: post-install-job  
+        image: "image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"  
+        command: ["/bin/bash", "/script/approve-sub.sh"]
+            #- {{ tpl (.Files.Get "post-install.sh") . | quote }}
+        volumeMounts:
+          - name: script
+            mountPath: "/script"
+      volumes:
+        - name: script
+          configMap:
+            name: {{ print .Values.amq.name "-og" }}-post-install-hook-cm
+      restartPolicy: Never
+{{- end }}

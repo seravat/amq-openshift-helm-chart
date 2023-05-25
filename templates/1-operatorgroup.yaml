@@ -1,5 +1,12 @@
 {{- if .Values.amq.operator }}
-{{- if .Values.amq.operator.namespace }}
+{{- if eq .Values.amq.operator.scope "cluster" }}
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: {{ print .Values.amq.name "-og" }}
+spec: {}
+{{- else if eq .Values.amq.operator.scope "namespace"}}
 ---
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
