@@ -20,7 +20,6 @@ spec:
       - name: post-install-job  
         image: "image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"  
         command: ["/bin/bash", "/script/approve-sub.sh"]
-            #- {{ tpl (.Files.Get "post-install.sh") . | quote }}
         volumeMounts:
           - name: script
             mountPath: "/script"
