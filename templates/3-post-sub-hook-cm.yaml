@@ -19,7 +19,7 @@ data:
     if [ "$startingCSV" == "{{ .Values.amq.operator.subscription.installPlanApproval }}" ]; then
         echo 'Waiting for InstallPlan to show up'
         WHILECMD="[ -z "$(oc get installplan -l operators.coreos.com/{{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }} -oname)" ]"
-        gtimeout 15m sh -c "while $WHILECMD; do echo Waiting; sleep 10; done"
+        timeout 15m sh -c "while $WHILECMD; do echo Waiting; sleep 10; done"
 
         # Search InstallPlan based on startingCSV
         echo 'Search InstallPlan based on startingCSV'
@@ -47,8 +47,6 @@ data:
 
         # Approve the InstallPlan
         if [ "$(oc get ip $installplan -o jsonpath='{.spec.approved}')" == "false" ]; then
-            if [ "$installplan" == "{{ .Values.amq.operator.subscription.startingCSV }}" ]; then
-            fi
             echo "Approving install plan $installplan"
             oc patch ip $installplan --type=json -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
         else

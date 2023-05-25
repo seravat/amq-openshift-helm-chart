@@ -1,0 +1,15 @@
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: Role
+# metadata:
+#   name: operator-controller
+# rules:
+# - apiGroups:
+#     - operators.coreos.com
+#   resources:
+#     - clusterserviceversions
+#     - catalogsources
+#     - installplans
+#     - subscriptions
+#     - operatorgroups
+#   verbs:
+#   - '*'
