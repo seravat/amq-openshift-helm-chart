@@ -6,10 +6,9 @@
 # - apiGroups:
 #     - operators.coreos.com
 #   resources:
-#     - clusterserviceversions
-#     - catalogsources
 #     - installplans
 #     - subscriptions
-#     - operatorgroups
 #   verbs:
-#   - '*'
+#     - get
+#     - list
+#     - patch
