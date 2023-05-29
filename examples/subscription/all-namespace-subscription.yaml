@@ -7,3 +7,5 @@ amq:
       name: amq-broker-rhel8
       subscription: redhat-operators
       sourceNamespace: openshift-marketplace
+
+

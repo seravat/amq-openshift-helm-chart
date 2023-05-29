@@ -4,7 +4,7 @@ Error from server (Forbidden): subscriptions.operators.coreos.com "amq-broker-rh
 
 2. Helm
 
-helm upgrade --force --install amq --values=values-operator.yaml --debug .
+helm upgrade --force --install amq --values=values-cluster-operator.yaml --debug .
 
 Helm upgrade does not work if configmap or job are alredy deployed
 

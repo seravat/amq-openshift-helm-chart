@@ -23,9 +23,15 @@ spec:
         volumeMounts:
           - name: script
             mountPath: "/script"
+        # volumeMounts:
+        #   - name: cleanup-script
+        #     mountPath: "/cleanup"
       volumes:
         - name: script
           configMap:
             name: {{ print .Values.amq.name "-og" }}-post-install-hook-cm
+        # - name: cleanup-script
+        #   configMap:
+        #     name: {{ print .Values.amq.name "-og" }}-pre-install-hook-cm
       restartPolicy: Never
 {{- end }}

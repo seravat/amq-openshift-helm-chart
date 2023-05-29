@@ -7,8 +7,8 @@ metadata:
 {{- if .Values.amq.operator.namespace }}
   namespace: {{ .Values.amq.operator.namespace }}
 {{- else }}
-  namespace: openshift-operators
-{{- end }}  
+  namespace: openshift-operators #change this
+{{- end }}
 spec:
   channel: {{ .Values.amq.operator.subscription.channel | default "7.10.x" }}
   installPlanApproval: {{ .Values.amq.operator.subscription.installPlanApproval | default "Manual" }}

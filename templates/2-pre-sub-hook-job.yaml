@@ -1,0 +1,31 @@
+---
+{{- if eq .Values.amq.operator.subscription.installPlanApproval "Manual"}}
+apiVersion: batch/v1  
+kind: Job  
+metadata:  
+  name: {{ print .Values.amq.name "-og" }}-pre-install-hook-job
+  annotations:  
+    # This is what defines this resource as a hook. Without this line, the  
+    # job is considered part of the release.  
+    "helm.sh/hook": pre-install,pre-upgrade  
+    "helm.sh/hook-weight": "-5"  
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:  
+  template:  
+    metadata:  
+      name: {{ print .Values.amq.name "-og" }}-pre-install-hook-job
+    spec:  
+      restartPolicy: Never  
+      containers:  
+      - name: pre-install-job  
+        image: "image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"  
+        command: ["/bin/bash", "/script/cleanup.sh"]
+        volumeMounts:
+          - name: script
+            mountPath: "/script"
+      volumes:
+        - name: script
+          configMap:
+            name: {{ print .Values.amq.name "-og" }}-pre-install-hook-cm
+      restartPolicy: Never
+{{- end }}
