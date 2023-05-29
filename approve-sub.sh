@@ -2,7 +2,7 @@
 echo 'Install Plan Approval Script'
 
 approval=$(oc get subscription.operators.coreos.com {{ .Values.amq.name }} -o jsonpath='{.spec.installPlanApproval}')
-if [ "$approval" == "Manual" ]; then
+if [ "$approval" == "{{ .Values.amq.operator.subscription.installPlanApproval }}" ]; then
     echo 'Waiting for InstallPlan to show up'
     WHILECMD="[ -z "$(oc get installplan -l operators.coreos.com/{{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }} -oname)" ]"
     timeout 15m sh -c "while $WHILECMD; do echo Waiting; sleep 10; done"
@@ -37,6 +37,9 @@ if [ "$approval" == "Manual" ]; then
     if [ "$(oc get ip $installplan -o jsonpath='{.spec.approved}')" == "false" ]; then
         echo "Approving install plan $installplan"
         oc patch ip $installplan --type=json -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
+        #This is failing
+        sleep 10
+        oc label ip $installplan operators.coreos.com/amq-broker-rhel8.amq-operator-cluster='approved' 
     else
         echo "Install Plan '$installplan' was already approved"
     fi

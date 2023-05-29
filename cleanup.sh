@@ -38,6 +38,21 @@ do
     #remove_finalizers "installplan.operators.coreos.com/$IP"
 done
 
+echo "Deleting {{ .Values.amq.name }} operator Install Plans..."
+for IP in $(oc get installplan.operators.coreos.com -l operators.coreos.com/{{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }} | cut -d' ' -f 1); 
+do 
+    echo "===> Deleting InstallPlan: \"$IP\""; 
+    oc delete installplan.operators.coreos.com/$IP || true;
+    #remove_finalizers "installplan.operators.coreos.com/$IP"
+done
+
+for IP in $(oc get installplan.operators.coreos.com -l {{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }}='approved' | cut -d' ' -f 1); 
+do 
+    echo "===> Deleting InstallPlan: \"$IP\""; 
+    oc delete installplan.operators.coreos.com/$IP || true;
+    #remove_finalizers "installplan.operators.coreos.com/$IP"
+done
+
 sleep 10
 
 #oc delete all -l operators.coreos.com/{{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }}
