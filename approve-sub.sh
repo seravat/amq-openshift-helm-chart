@@ -38,7 +38,7 @@ if [ "$approval" == "Manual" ]; then
         echo "Approving install plan $installplan"
         oc patch ip $installplan --type=json -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
         sleep 5
-        oc label ip $installplan amq-broker-rhel8.amq-operator-cluster='approved' 
+        oc label ip $installplan {{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }}='approved' 
     else
         echo "Install Plan '$installplan' was already approved"
     fi
