@@ -9,5 +9,5 @@ amq:
       installPlanApproval: Manual #only Manual will work
       source: redhat-operators
       sourceNamespace: openshift-marketplace
-      startingCSV: amq-broker-operator.v7.10.2-opr-2 #this is mandatory
+      startingCSV: amq-broker-operator.v7.10.2-opr-2-0.1680622941.p #this is mandatory
       allNamespaces: false

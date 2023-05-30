@@ -8,3 +8,6 @@ helm upgrade --force --install amq --values=values-cluster-operator.yaml --debug
 
 Helm upgrade does not work if configmap or job are alredy deployed
 
+echo 'Waiting for InstallPlan to show up' \
+WHILECMD="[ -z "$(oc get installplan -l operators.coreos.com/amq-broker-rhel8.amq-operator-cluster -oname)" ]" \
+timeout 5m sh -c "while $WHILECMD; do echo Waiting; sleep 10; echo "$WHILECMD" done"

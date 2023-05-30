@@ -2,10 +2,10 @@
 echo 'Install Plan Approval Script'
 
 approval=$(oc get subscription.operators.coreos.com {{ .Values.amq.name }} -o jsonpath='{.spec.installPlanApproval}')
-if [ "$approval" == "{{ .Values.amq.operator.subscription.installPlanApproval }}" ]; then
+if [ "$approval" == "Manual" ]; then
     echo 'Waiting for InstallPlan to show up'
-    WHILECMD="[ -z "$(oc get installplan -l operators.coreos.com/{{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }} -oname)" ]"
-    timeout 15m sh -c "while $WHILECMD; do echo Waiting; sleep 10; done"
+    WHILECMD='[ -z "$(oc get installplan -l operators.coreos.com/{{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }} -oname)" ]'
+    timeout 5m sh -c "while $WHILECMD; do echo Waiting; sleep 10; done"
 
     # Search InstallPlan based on startingCSV
     echo 'Search InstallPlan based on startingCSV'
@@ -29,7 +29,7 @@ if [ "$approval" == "{{ .Values.amq.operator.subscription.installPlanApproval }}
     # No InstallPlan found
     if [ -z "$installplan" ]; then
         echo "No InstallPlan was found for operator with label operators.coreos.com/{{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }}. This indicates a failure about operator installation."
-        /bin/bash /cleanup/cleanup.sh
+        oc delete subscription.operators.coreos.com {{ .Values.amq.name }}
         exit 1;
     fi
 
@@ -37,15 +37,13 @@ if [ "$approval" == "{{ .Values.amq.operator.subscription.installPlanApproval }}
     if [ "$(oc get ip $installplan -o jsonpath='{.spec.approved}')" == "false" ]; then
         echo "Approving install plan $installplan"
         oc patch ip $installplan --type=json -p='[{"op":"replace","path": "/spec/approved", "value": true}]'
-        #This is failing
-        sleep 10
-        oc label ip $installplan operators.coreos.com/amq-broker-rhel8.amq-operator-cluster='approved' 
+        sleep 5
+        oc label ip $installplan amq-broker-rhel8.amq-operator-cluster='approved' 
     else
         echo "Install Plan '$installplan' was already approved"
     fi
 else
     echo 'Approval must be Manual ! ABORTING...'
-    /bin/bash /cleanup/cleanup.sh
     exit 1;
 fi
 sleep 20

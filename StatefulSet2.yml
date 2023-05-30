@@ -1,0 +1,661 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  resourceVersion: '1227089'
+  name: amq-broker-ss
+  uid: 0910ffbc-e54e-4623-9edf-9e21d5d0e72f
+  creationTimestamp: '2023-05-29T12:47:15Z'
+  generation: 10
+  managedFields:
+  - manager: amq-broker-operator
+    operation: Update
+    apiVersion: apps/v1
+    time: '2023-05-30T10:49:13Z'
+    fieldsType: FieldsV1
+    fieldsV1:
+      'f:metadata':
+        'f:labels':
+          .: {}
+          'f:ActiveMQArtemis': {}
+          'f:application': {}
+        'f:ownerReferences':
+          .: {}
+          'k:{"uid":"2a710052-9a4b-4d32-83e6-71425175f49d"}': {}
+      'f:spec':
+        'f:podManagementPolicy': {}
+        'f:replicas': {}
+        'f:revisionHistoryLimit': {}
+        'f:selector': {}
+        'f:serviceName': {}
+        'f:template':
+          'f:metadata':
+            'f:labels':
+              'f:rht.subcomp_t': {}
+              'f:rht.subcomp': {}
+              .: {}
+              'f:rht.prod_name': {}
+              'f:rht.comp': {}
+              'f:ActiveMQArtemis': {}
+              'f:rht.comp_ver': {}
+              'f:application': {}
+              'f:com.company': {}
+              'f:rht.prod_ver': {}
+          'f:spec':
+            'f:volumes':
+              .: {}
+              'k:{"name":"amq-cfg-dir"}':
+                .: {}
+                'f:emptyDir': {}
+                'f:name': {}
+              'k:{"name":"configmap-amq-broker-props-00000001"}':
+                .: {}
+                'f:configMap':
+                  .: {}
+                  'f:defaultMode': {}
+                  'f:name': {}
+                'f:name': {}
+              'k:{"name":"tool-dir"}':
+                .: {}
+                'f:emptyDir': {}
+                'f:name': {}
+            'f:containers':
+              'k:{"name":"amq-broker-container"}':
+                'f:image': {}
+                'f:volumeMounts':
+                  .: {}
+                  'k:{"mountPath":"/amq/extra/configmaps/amq-broker-props-00000001"}':
+                    .: {}
+                    'f:mountPath': {}
+                    'f:name': {}
+                    'f:readOnly': {}
+                  'k:{"mountPath":"/amq/init/config"}':
+                    .: {}
+                    'f:mountPath': {}
+                    'f:name': {}
+                'f:terminationMessagePolicy': {}
+                .: {}
+                'f:resources': {}
+                'f:command': {}
+                'f:livenessProbe':
+                  .: {}
+                  'f:failureThreshold': {}
+                  'f:initialDelaySeconds': {}
+                  'f:periodSeconds': {}
+                  'f:successThreshold': {}
+                  'f:tcpSocket':
+                    .: {}
+                    'f:port': {}
+                  'f:timeoutSeconds': {}
+                'f:env':
+                  'k:{"name":"AMQ_JOURNAL_TYPE"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_QUEUES"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"AMQ_ACCEPTORS"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                  'k:{"name":"AMQ_ENABLE_METRICS_PLUGIN"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_ENABLE_JOLOKIA_AGENT"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_ANYCAST_PREFIX"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"AMQ_CONNECTORS"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                  'k:{"name":"AMQ_REQUIRE_LOGIN"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"CONFIG_BROKER"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_TRANSPORTS"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"AMQ_NAME"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_USER"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                  'k:{"name":"PING_SVC_NAME"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_EXTRA_ARGS"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"OPENSHIFT_DNS_PING_SERVICE_PORT"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  .: {}
+                  'k:{"name":"AMQ_CLUSTER_USER"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                  'k:{"name":"AMQ_GLOBAL_MAX_SIZE"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_ENABLE_MANAGEMENT_RBAC"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_CLUSTERED"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"CONFIG_INSTANCE_DIR"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"POD_NAMESPACE"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"AMQ_ROLE"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_MULTICAST_PREFIX"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"TRIGGERED_ROLL_COUNT"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_PASSWORD"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                  'k:{"name":"AMQ_ADDRESSES"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"AMQ_CLUSTER_PASSWORD"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                'f:readinessProbe':
+                  .: {}
+                  'f:exec':
+                    .: {}
+                    'f:command': {}
+                  'f:failureThreshold': {}
+                  'f:initialDelaySeconds': {}
+                  'f:periodSeconds': {}
+                  'f:successThreshold': {}
+                  'f:timeoutSeconds': {}
+                'f:terminationMessagePath': {}
+                'f:imagePullPolicy': {}
+                'f:ports':
+                  .: {}
+                  'k:{"containerPort":8161,"protocol":"TCP"}':
+                    .: {}
+                    'f:containerPort': {}
+                    'f:name': {}
+                    'f:protocol': {}
+                'f:name': {}
+            'f:dnsPolicy': {}
+            'f:restartPolicy': {}
+            'f:schedulerName': {}
+            'f:terminationGracePeriodSeconds': {}
+            'f:initContainers':
+              .: {}
+              'k:{"name":"amq-broker-container-init"}':
+                'f:image': {}
+                'f:volumeMounts':
+                  .: {}
+                  'k:{"mountPath":"/amq/extra/configmaps/amq-broker-props-00000001"}':
+                    .: {}
+                    'f:mountPath': {}
+                    'f:name': {}
+                    'f:readOnly': {}
+                  'k:{"mountPath":"/amq/init/config"}':
+                    .: {}
+                    'f:mountPath': {}
+                    'f:name': {}
+                  'k:{"mountPath":"/init_cfg_root"}':
+                    .: {}
+                    'f:mountPath': {}
+                    'f:name': {}
+                'f:terminationMessagePolicy': {}
+                .: {}
+                'f:resources': {}
+                'f:args': {}
+                'f:command': {}
+                'f:env':
+                  'k:{"name":"AMQ_JOURNAL_TYPE"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_QUEUES"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"AMQ_ACCEPTORS"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                  'k:{"name":"AMQ_ENABLE_METRICS_PLUGIN"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_ENABLE_JOLOKIA_AGENT"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_ANYCAST_PREFIX"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"AMQ_CONNECTORS"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                  'k:{"name":"AMQ_REQUIRE_LOGIN"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_TRANSPORTS"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"AMQ_NAME"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_USER"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                  'k:{"name":"PING_SVC_NAME"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_EXTRA_ARGS"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"OPENSHIFT_DNS_PING_SERVICE_PORT"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  .: {}
+                  'k:{"name":"AMQ_CLUSTER_USER"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                  'k:{"name":"JAVA_OPTS"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_GLOBAL_MAX_SIZE"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_ENABLE_MANAGEMENT_RBAC"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_CLUSTERED"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"RUN_BROKER"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"CONFIG_INSTANCE_DIR"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"POD_NAMESPACE"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"AMQ_ROLE"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_MULTICAST_PREFIX"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"TRIGGERED_ROLL_COUNT"}':
+                    .: {}
+                    'f:name': {}
+                    'f:value': {}
+                  'k:{"name":"AMQ_PASSWORD"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                  'k:{"name":"AMQ_ADDRESSES"}':
+                    .: {}
+                    'f:name': {}
+                  'k:{"name":"AMQ_CLUSTER_PASSWORD"}':
+                    .: {}
+                    'f:name': {}
+                    'f:valueFrom':
+                      .: {}
+                      'f:secretKeyRef': {}
+                'f:terminationMessagePath': {}
+                'f:imagePullPolicy': {}
+                'f:name': {}
+            'f:securityContext': {}
+            'f:affinity': {}
+        'f:updateStrategy':
+          'f:rollingUpdate':
+            .: {}
+            'f:partition': {}
+          'f:type': {}
+  - manager: kube-controller-manager
+    operation: Update
+    apiVersion: apps/v1
+    time: '2023-05-30T10:50:07Z'
+    fieldsType: FieldsV1
+    fieldsV1:
+      'f:status':
+        'f:availableReplicas': {}
+        'f:collisionCount': {}
+        'f:currentRevision': {}
+        'f:observedGeneration': {}
+        'f:readyReplicas': {}
+        'f:replicas': {}
+        'f:updateRevision': {}
+        'f:updatedReplicas': {}
+    subresource: status
+  namespace: amq-operator-cluster
+  ownerReferences:
+  - apiVersion: broker.amq.io/v1beta1
+    kind: ActiveMQArtemis
+    name: amq-broker
+    uid: 2a710052-9a4b-4d32-83e6-71425175f49d
+    controller: true
+    blockOwnerDeletion: true
+  labels:
+    ActiveMQArtemis: amq-broker
+    application: amq-broker-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      ActiveMQArtemis: amq-broker
+      application: amq-broker-app
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        rht.comp_ver: 7.10.2
+        rht.prod_name: Red_Hat_Integration
+        rht.prod_ver: 2022.Q4
+        ActiveMQArtemis: amq-broker
+        com.company: Red_Hat
+        application: amq-broker-app
+        rht.subcomp_t: application
+        rht.subcomp: broker-amq
+        rht.comp: Broker_AMQ
+    spec:
+      restartPolicy: Always
+      initContainers:
+      - resources: {}
+        terminationMessagePath: /dev/termination-log
+        name: amq-broker-container-init
+        command:
+        - /bin/bash
+        env:
+        - name: AMQ_ACCEPTORS
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-netty-secret
+              key: AMQ_ACCEPTORS
+        - name: AMQ_ADDRESSES
+        - name: AMQ_ANYCAST_PREFIX
+        - name: AMQ_CLUSTERED
+          value: 'true'
+        - name: AMQ_CLUSTER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-credentials-secret
+              key: AMQ_CLUSTER_PASSWORD
+        - name: AMQ_CLUSTER_USER
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-credentials-secret
+              key: AMQ_CLUSTER_USER
+        - name: AMQ_CONNECTORS
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-netty-secret
+              key: AMQ_CONNECTORS
+        - name: AMQ_ENABLE_JOLOKIA_AGENT
+          value: 'false'
+        - name: AMQ_ENABLE_MANAGEMENT_RBAC
+          value: 'true'
+        - name: AMQ_ENABLE_METRICS_PLUGIN
+          value: 'false'
+        - name: AMQ_EXTRA_ARGS
+          value: '--no-autotune'
+        - name: AMQ_GLOBAL_MAX_SIZE
+          value: 100 mb
+        - name: AMQ_JOURNAL_TYPE
+          value: nio
+        - name: AMQ_MULTICAST_PREFIX
+        - name: AMQ_NAME
+          value: amq-broker
+        - name: AMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-credentials-secret
+              key: AMQ_PASSWORD
+        - name: AMQ_QUEUES
+        - name: AMQ_REQUIRE_LOGIN
+          value: 'false'
+        - name: AMQ_ROLE
+          value: admin
+        - name: AMQ_TRANSPORTS
+        - name: AMQ_USER
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-credentials-secret
+              key: AMQ_USER
+        - name: CONFIG_INSTANCE_DIR
+          value: /amq/init/config
+        - name: JAVA_OPTS
+          value: >-
+            -Dbroker.properties=/amq/extra/configmaps/amq-broker-props-00000001/broker.properties
+        - name: OPENSHIFT_DNS_PING_SERVICE_PORT
+          value: '7800'
+        - name: PING_SVC_NAME
+          value: amq-broker-ping-svc
+        - name: POD_NAMESPACE
+        - name: RUN_BROKER
+          value: 'false'
+        - name: TRIGGERED_ROLL_COUNT
+          value: '0'
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: amq-cfg-dir
+          mountPath: /amq/init/config
+        - name: tool-dir
+          mountPath: /init_cfg_root
+        - name: configmap-amq-broker-props-00000001
+          readOnly: true
+          mountPath: /amq/extra/configmaps/amq-broker-props-00000001
+        terminationMessagePolicy: File
+        image: >-
+          registry.redhat.io/amq7/amq-broker-init-rhel8@sha256:e2fc891546ed8495743ff0dd0b1b16b0ef622aa324a0a53fb3a2117ccabf9f1e
+        args:
+        - '-c'
+        - /opt/amq/bin/launch.sh && /opt/amq-broker/script/default.sh
+      schedulerName: default-scheduler
+      affinity: {}
+      terminationGracePeriodSeconds: 60
+      securityContext: {}
+      containers:
+      - resources: {}
+        readinessProbe:
+          exec:
+            command:
+            - /bin/bash
+            - '-c'
+            - /opt/amq/bin/readinessProbe.sh
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        terminationMessagePath: /dev/termination-log
+        name: amq-broker-container
+        command:
+        - /bin/sh
+        - '-c'
+        - >-
+          export STATEFUL_SET_ORDINAL=${HOSTNAME##*-};exec /opt/amq/bin/launch.sh
+        - start
+        livenessProbe:
+          tcpSocket:
+            port: 8161
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 3
+        env:
+        - name: AMQ_ACCEPTORS
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-netty-secret
+              key: AMQ_ACCEPTORS
+        - name: AMQ_ADDRESSES
+        - name: AMQ_ANYCAST_PREFIX
+        - name: AMQ_CLUSTERED
+          value: 'true'
+        - name: AMQ_CLUSTER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-credentials-secret
+              key: AMQ_CLUSTER_PASSWORD
+        - name: AMQ_CLUSTER_USER
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-credentials-secret
+              key: AMQ_CLUSTER_USER
+        - name: AMQ_CONNECTORS
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-netty-secret
+              key: AMQ_CONNECTORS
+        - name: AMQ_ENABLE_JOLOKIA_AGENT
+          value: 'false'
+        - name: AMQ_ENABLE_MANAGEMENT_RBAC
+          value: 'true'
+        - name: AMQ_ENABLE_METRICS_PLUGIN
+          value: 'false'
+        - name: AMQ_EXTRA_ARGS
+          value: '--no-autotune'
+        - name: AMQ_GLOBAL_MAX_SIZE
+          value: 100 mb
+        - name: AMQ_JOURNAL_TYPE
+          value: nio
+        - name: AMQ_MULTICAST_PREFIX
+        - name: AMQ_NAME
+          value: amq-broker
+        - name: AMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-credentials-secret
+              key: AMQ_PASSWORD
+        - name: AMQ_QUEUES
+        - name: AMQ_REQUIRE_LOGIN
+          value: 'false'
+        - name: AMQ_ROLE
+          value: admin
+        - name: AMQ_TRANSPORTS
+        - name: AMQ_USER
+          valueFrom:
+            secretKeyRef:
+              name: amq-broker-credentials-secret
+              key: AMQ_USER
+        - name: CONFIG_BROKER
+          value: 'false'
+        - name: CONFIG_INSTANCE_DIR
+          value: /amq/init/config
+        - name: OPENSHIFT_DNS_PING_SERVICE_PORT
+          value: '7800'
+        - name: PING_SVC_NAME
+          value: amq-broker-ping-svc
+        - name: POD_NAMESPACE
+        - name: TRIGGERED_ROLL_COUNT
+          value: caa24869
+        ports:
+        - name: wconsj
+          containerPort: 8161
+          protocol: TCP
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: configmap-amq-broker-props-00000001
+          readOnly: true
+          mountPath: /amq/extra/configmaps/amq-broker-props-00000001
+        - name: amq-cfg-dir
+          mountPath: /amq/init/config
+        terminationMessagePolicy: File
+        image: >-
+          registry.redhat.io/amq7/amq-broker-rhel8@sha256:9e2ae18cb967c9b2d077e634433fc9a18aded1460e6e90884c15829c4af702a3
+      volumes:
+      - name: configmap-amq-broker-props-00000001
+        configMap:
+          name: amq-broker-props-00000001
+          defaultMode: 420
+      - name: amq-cfg-dir
+        emptyDir: {}
+      - name: tool-dir
+        emptyDir: {}
+      dnsPolicy: ClusterFirst
+  serviceName: amq-broker-hdls-svc
+  podManagementPolicy: OrderedReady
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      partition: 0
+  revisionHistoryLimit: 10
+status:
+  observedGeneration: 10
+  replicas: 2
+  readyReplicas: 1
+  updatedReplicas: 2
+  currentRevision: amq-broker-ss-66f65fb88c
+  updateRevision: amq-broker-ss-6d9cb84d57
+  collisionCount: 0
+  availableReplicas: 1

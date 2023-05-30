@@ -29,15 +29,10 @@ CSV_NAME=$(oc get csv -l operators.coreos.com/{{ .Values.amq.name }}.{{ .Values.
 oc delete $CSV_NAME
 #remove_finalizers "$CSV_NAME"
 
-#This only deletes unnaproved IPs - the one we approved does not have that label
-echo "Deleting {{ .Values.amq.name }} operator Install Plans..."
-for IP in $(oc get installplan.operators.coreos.com -l operators.coreos.com/{{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }} | cut -d' ' -f 1); 
-do 
-    echo "===> Deleting InstallPlan: \"$IP\""; 
-    oc delete installplan.operators.coreos.com/$IP || true;
-    #remove_finalizers "installplan.operators.coreos.com/$IP"
-done
+echo "Deleting {{ .Values.amq.operator.subscription.name }} Subscription..."
+oc delete Subscription/{{ .Values.amq.operator.subscription.name }} || true;
 
+#This only deletes unnaproved IPs - the one we approved does not have that label
 echo "Deleting {{ .Values.amq.name }} operator Install Plans..."
 for IP in $(oc get installplan.operators.coreos.com -l operators.coreos.com/{{ .Values.amq.name }}.{{ .Values.amq.operator.namespace }} | cut -d' ' -f 1); 
 do 
