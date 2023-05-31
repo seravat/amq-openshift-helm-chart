@@ -1,5 +1,5 @@
 ---
-{{- if eq .Values.amq.operator.subscription.installPlanApproval "Manual"}}
+{{- if eq .Values.subscription.installPlanApproval "Manual"}}
 apiVersion: batch/v1  
 kind: Job  
 metadata:  
@@ -8,9 +8,12 @@ metadata:
     # This is what defines this resource as a hook. Without this line, the  
     # job is considered part of the release.  
     "helm.sh/hook": post-install,post-upgrade  
-    "helm.sh/hook-weight": "-5"  
+    "helm.sh/hook-weight": "2" 
     "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
-spec:  
+spec: 
+  completions: 1    
+  activeDeadlineSeconds: 1800 
+  backoffLimit: 2
   template:  
     metadata:  
       name: {{ print .Values.amq.name "-og" }}-post-install-hook-job
@@ -23,15 +26,9 @@ spec:
         volumeMounts:
           - name: script
             mountPath: "/script"
-        # volumeMounts:
-        #   - name: cleanup-script
-        #     mountPath: "/cleanup"
       volumes:
         - name: script
           configMap:
             name: {{ print .Values.amq.name "-og" }}-post-install-hook-cm
-        # - name: cleanup-script
-        #   configMap:
-        #     name: {{ print .Values.amq.name "-og" }}-pre-install-hook-cm
       restartPolicy: Never
 {{- end }}

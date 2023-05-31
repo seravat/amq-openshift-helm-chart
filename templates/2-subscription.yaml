@@ -1,0 +1,15 @@
+---
+{{- if .Values.operator }}
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ .Values.subscription.name | default "amq-broker-rhel8" }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  channel: {{ required "A valid channel is required!" .Values.subscription.channel }}
+  installPlanApproval: {{ .Values.subscription.installPlanApproval }}
+  name: {{ .Values.subscription.name }}
+  source: {{ .Values.subscription.source }}
+  sourceNamespace: {{ .Values.subscription.sourceNamespace }}
+  startingCSV: {{ required "A valid startingCSV is required!" .Values.subscription.startingCSV }}
+{{- end }}

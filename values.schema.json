@@ -1,0 +1,165 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "amq",
+        "operator",
+        "subscription"
+    ],
+    "properties": {
+        "amq": {
+            "type": "object",
+            "default": {},
+            "title": "The amq Schema",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The name Schema",
+                    "examples": [
+                        "amq-broker-rhel8"
+                    ]
+                }
+            },
+            "examples": [{
+                "name": "amq-broker-rhel8"
+            }]
+        },
+        "operator": {
+            "type": "object",
+            "default": {},
+            "title": "The operator Schema",
+            "required": [
+                "scope",
+                "namespace"
+            ],
+            "properties": {
+                "scope": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The scope Schema",
+                    "examples": [
+                        "cluster"
+                    ]
+                },
+                "namespace": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The namespace Schema",
+                    "examples": [
+                        "amq-operator-cluster"
+                    ]
+                }
+            },
+            "examples": [{
+                "scope": "cluster",
+                "namespace": "amq-operator-cluster"
+            }]
+        },
+        "subscription": {
+            "type": "object",
+            "default": {},
+            "title": "The subscription Schema",
+            "required": [
+                "name",
+                "channel",
+                "installPlanApproval",
+                "source",
+                "sourceNamespace",
+                "startingCSV"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The name Schema",
+                    "examples": [
+                        "amq-broker-rhel8"
+                    ]
+                },
+                "channel": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The channel Schema",
+                    "examples": [
+                        "7.10.x"
+                    ]
+                },
+                "installPlanApproval": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The installPlanApproval Schema",
+                    "examples": [
+                        "Manual"
+                    ],
+                    "enum": ["Manual"]
+                },
+                "source": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The source Schema",
+                    "examples": [
+                        "redhat-operators"
+                    ]
+                },
+                "sourceNamespace": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The sourceNamespace Schema",
+                    "examples": [
+                        "openshift-marketplace"
+                    ]
+                },
+                "startingCSV": {
+                    "type": "string",
+                    "default": "",
+                    "title": "The startingCSV Schema",
+                    "examples": [
+                        "amq-broker-operator.v7.10.2-opr-2-0.1680622941.p"
+                    ]
+                },
+                "allNamespaces": {
+                    "type": "boolean",
+                    "default": false,
+                    "title": "The allNamespaces Schema",
+                    "examples": [
+                        false
+                    ]
+                }
+            },
+            "examples": [{
+                "name": "amq-broker-rhel8",
+                "channel": "7.10.x",
+                "installPlanApproval": "Manual",
+                "source": "redhat-operators",
+                "sourceNamespace": "openshift-marketplace",
+                "startingCSV": "amq-broker-operator.v7.10.2-opr-2-0.1680622941.p",
+                "allNamespaces": false
+            }]
+        }
+    },
+    "examples": [{
+        "amq": {
+            "name": "amq-broker-rhel8"
+        },
+        "operator": {
+            "scope": "cluster",
+            "namespace": "amq-operator-cluster"
+        },
+        "subscription": {
+            "name": "amq-broker-rhel8",
+            "channel": "7.10.x",
+            "installPlanApproval": "Manual",
+            "source": "redhat-operators",
+            "sourceNamespace": "openshift-marketplace",
+            "startingCSV": "amq-broker-operator.v7.10.2-opr-2-0.1680622941.p",
+            "allNamespaces": false
+        }
+    }]
+}

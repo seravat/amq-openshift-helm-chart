@@ -1,23 +1,26 @@
 ---
-{{- if eq .Values.amq.operator.subscription.installPlanApproval "Manual"}}
+{{- if eq .Values.subscription.installPlanApproval "Manual"}}
 apiVersion: batch/v1  
 kind: Job  
 metadata:  
-  name: {{ print .Values.amq.name "-og" }}-pre-install-hook-job
+  name: {{ print .Values.amq.name "-og" }}-post-delete-hook-job
   annotations:  
     # This is what defines this resource as a hook. Without this line, the  
     # job is considered part of the release.  
-    "helm.sh/hook": pre-install,pre-upgrade  
-    "helm.sh/hook-weight": "-5"  
+    "helm.sh/hook": post-delete 
+    "helm.sh/hook-weight": "2" 
     "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
 spec:  
+  completions: 1    
+  activeDeadlineSeconds: 1800 
+  backoffLimit: 2
   template:  
     metadata:  
-      name: {{ print .Values.amq.name "-og" }}-pre-install-hook-job
+      name: {{ print .Values.amq.name "-og" }}-post-delete-hook-job
     spec:  
       restartPolicy: Never  
       containers:  
-      - name: pre-install-job  
+      - name: post-delete-job  
         image: "image-registry.openshift-image-registry.svc:5000/openshift/tools:latest"  
         command: ["/bin/bash", "/script/cleanup.sh"]
         volumeMounts:
@@ -26,6 +29,6 @@ spec:
       volumes:
         - name: script
           configMap:
-            name: {{ print .Values.amq.name "-og" }}-pre-install-hook-cm
+            name: {{ print .Values.amq.name "-og" }}-post-delete-hook-cm
       restartPolicy: Never
 {{- end }}
