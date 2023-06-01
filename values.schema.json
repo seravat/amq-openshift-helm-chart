@@ -44,9 +44,7 @@
                     "type": "string",
                     "default": "",
                     "title": "The scope Schema",
-                    "examples": [
-                        "cluster"
-                    ]
+                    "enum": ["cluster"]
                 },
                 "namespace": {
                     "type": "string",
