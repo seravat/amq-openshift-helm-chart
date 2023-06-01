@@ -5,8 +5,15 @@ apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
   name: {{ print .Values.amq.name "-og" }}
+spec: {}
+{{- else if eq .Values.operator.scope "namespace"}}
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: {{ print .Values.amq.name "-og" }}
 spec:
   targetNamespaces:
-    - {{ .Release.Namespace }}
+    - {{ .Values.operator.namespace }}
 {{- end }}
 {{- end }}
