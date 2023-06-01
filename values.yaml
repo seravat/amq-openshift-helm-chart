@@ -1,12 +1,14 @@
 amq:
-  name: amq
-  application: amq-broker
-  # broker:
-  #   deploymentPlan:
-  #     resources: 
-  #   console:
-  #   acceptors:
-  #   connectors:
-  #   upgrades:
-  # queues:
-  # security:
+  name: amq-broker-rhel8
+
+operator:
+  scope: cluster #or namespace
+  namespace: bprosa-cso-amq
+
+subscription:
+  name: amq-broker-rhel8
+  channel: 7.10.x #this is mandatory
+  installPlanApproval: Manual #only Manual will work
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: amq-broker-operator.v7.10.2-opr-2 #this is mandatory

@@ -20,6 +20,7 @@ if [ "$approval" == "Manual" ]; then
         echo 'StartingCSV is set on subscription: {{ .Values.subscription.startingCSV }}'
         # This should return max one InstallPlan, unless multiple operators are installed in the same namespace
         installplan=$(oc get ip -ojson | jq -r '.items[] | select( .spec.clusterServiceVersionNames[] == "{{ .Values.subscription.startingCSV }}") | .metadata.name')
+        oc get installplan -ojson | jq -r '.items[] | select( .spec.clusterServiceVersionNames[] == "amq-broker-operator.v7.10.2-opr-2") | .metadata.name'
         # This returns multiple InstallPlans becase of the contains, eg: amq-broker-operator.v7.10.2-opr-2 and amq-broker-operator.v7.10.2-opr-2-0.1680622941.p
         #installplans=$(oc get ip -ojson | jq -r '.items[] | select( .spec.clusterServiceVersionNames[] | contains("amq-broker-operator.v7.10.2-opr-2")) | .metadata.name')
         # Could also filter for "approved == false" in one command, then we wouldn't need to check later
