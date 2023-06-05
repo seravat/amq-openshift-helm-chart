@@ -96,7 +96,7 @@
                     "examples": [
                         "Manual"
                     ],
-                    "enum": ["Manual", "Automatic"]
+                    "enum": ["Manual"]
                 },
                 "source": {
                     "type": "string",
