@@ -8,7 +8,7 @@ operator:
 subscription:
   name: amq-broker-rhel8
   channel: 7.10.x #this is mandatory
-  installPlanApproval: Automatic #only Manual will work
+  installPlanApproval: Manual #only Manual will work
   source: redhat-operators
   sourceNamespace: openshift-marketplace
   startingCSV: amq-broker-operator.v7.10.2-opr-2 #this is mandatory
